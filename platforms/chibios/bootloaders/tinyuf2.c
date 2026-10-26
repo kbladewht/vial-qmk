@@ -34,5 +34,10 @@ __attribute__((weak)) void bootloader_jump(void) {
     NVIC_SystemReset();
 }
 
+void bootloader_jump_new(void) {
+    DBL_TAP_REG = DBL_TAP_MAGIC;
+    NVIC_SystemReset();
+}
+
 /* not needed, no two-stage reset */
 void enter_bootloader_mode_if_requested(void) {}

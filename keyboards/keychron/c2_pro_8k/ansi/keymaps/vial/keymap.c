@@ -41,3 +41,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
     },
 };
+extern void bootloader_jump(void);
+#include "raw_hid.h"
+// Keyboard level code can override this to handle custom messages from VIA.
+// See raw_hid_receive() implementation.
+// DO NOT call raw_hid_send() in the override function.
+void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
+    uint8_t *command_id = &(data[0]);
+    //*command_id         = id_unhandled;
+
+    // NRF_LOG_INFO("data[0] is 3 *************** %d",data[0]);
+    switch (*command_id) {
+        case 0x0B:
+            raw_hid_send(data, length);
+            bootloader_jump();
+            break;
+
+        default:
+            break;
+    }
+}
+
+
+// extern void bootloader_jump_new(void);
+
+// void qf_bootloader_jump(void) {
+//     bootloader_jump_new();
+// }
