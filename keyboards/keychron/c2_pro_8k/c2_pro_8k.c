@@ -16,25 +16,3 @@
 
 // #include "keychron.h"
 
-#define POWER_ON_LED_DURATION 3000
-
-// static uint32_t power_on_indicator_timer = 0;
-
-
-// void keyboard_post_init_kb(void) {
-//     gpio_set_pin_output_push_pull(LED_MAC_OS_PIN);
-//     gpio_set_pin_output_push_pull(LED_WIN_OS_PIN);
-//     gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-//     gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-
-//     keychron_common_init();
-//     keyboard_post_init_user();
-//     power_on_indicator_timer = timer_read32();
-// }
-
-
-// void suspend_power_down_keychron_kb(void) {
-//     gpio_write_pin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-//     gpio_write_pin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-//     suspend_power_down_user();
-// }

@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
+#include "usb_main.h"
 
 enum layers {
     MAC_BASE,
@@ -23,6 +24,38 @@ enum layers {
     WIN_BASE,
     WIN_FN,
 };
+
+enum custom_keycodes {
+    REPORT_RATE_1K = SAFE_RANGE,
+    REPORT_RATE_4K,
+    REPORT_RATE_8K,
+};
+
+void update_usb_report_interval(USBDriver *usbp, uint8_t interval);
+
+void keyboard_post_init_user(void) {
+    update_usb_report_interval(&USB_DRIVER, 7);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) {
+        return true;
+    }
+
+    switch (keycode) {
+        case REPORT_RATE_1K:
+            update_usb_report_interval(&USB_DRIVER, 7);
+            return false;
+        case REPORT_RATE_4K:
+            update_usb_report_interval(&USB_DRIVER, 1);
+            return false;
+        case REPORT_RATE_8K:
+            update_usb_report_interval(&USB_DRIVER, 0);
+            return false;
+        default:
+            return true;
+    }
+}
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

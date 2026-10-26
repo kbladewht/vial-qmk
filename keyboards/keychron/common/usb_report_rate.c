@@ -14,7 +14,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef USB_REPORT_INTERVAL_ENABLE
+
 
 #    include <string.h>
 #    include "eeconfig_kb.h"
@@ -109,26 +109,6 @@ void report_rate_hid_rx(uint8_t *data, uint8_t length) {
     data[2] = success ? 0 : 1;
 }
 
-#if defined(KEY_RATE_1K) && defined(KEY_RATE_4K) && defined(KEY_RATE_8K) && defined(KEY_RATE_SELECT)
-__attribute__((weak)) void report_rate_indicator_set(uint8_t report_rate) {
-#    ifdef RGB_MATRIX_ENABLE
-    RGB color = {.r = 0, .g = 0, .b = 0};
-
-    switch (report_rate) {
-        case 0: // 8K
-            color.r = 255;
-            break;
-        case 1: // 4K
-            color.b = 255;
-            break;
-        case 3: // 1K
-            color.g = 255;
-            break;
-    }
-    backlight_indicator_start(250, 250, 3, color);
-#    endif
-}
-#endif
 
 bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -139,7 +119,6 @@ bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
                 report_rate_combo &= ~KEY_RATE_PRESS_FN;
             }
             break;
-#if defined(KEY_RATE_1K) && defined(KEY_RATE_4K) && defined(KEY_RATE_8K) && defined(KEY_RATE_SELECT)
         case KEY_RATE_SELECT:
             if (record->event.pressed) {
                 report_rate_combo |= KEY_RATE_PRESS_SELECT;
@@ -156,7 +135,6 @@ bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
                 if (report_rate_combo == KEY_RATE_COMBO_1K) {
                     uint8_t report_rate = 3;
                     report_rate_set(&report_rate, true);
-                    report_rate_indicator_set(report_rate);
                     return false;
                 }
             } else {
@@ -171,7 +149,6 @@ bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
                 if (report_rate_combo == KEY_RATE_COMBO_4K) {
                     uint8_t report_rate = 1;
                     report_rate_set(&report_rate, true);
-                    report_rate_indicator_set(report_rate);
                     return false;
                 }
             } else {
@@ -186,17 +163,15 @@ bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
                 if (report_rate_combo == KEY_RATE_COMBO_8K) {
                     uint8_t report_rate = 0;
                     report_rate_set(&report_rate, true);
-                    report_rate_indicator_set(report_rate);
                     return false;
                 }
             } else {
                 report_rate_combo &= ~KEY_RATE_PRESS_8K;
             }
             break;
-#endif
         default:break;
     }
 
     return true;
 }
-#endif
+

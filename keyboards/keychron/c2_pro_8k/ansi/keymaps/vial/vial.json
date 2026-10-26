@@ -2,6 +2,23 @@
   "name": "8K Game Keyboard",
   "vendorId": "0x3434",
   "productId": "0x0522",
+  "customKeycodes": [
+    {
+      "name": "REPORT_RATE_1K",
+      "title": "Set USB report rate to 1K",
+      "shortName": "1K"
+    },
+    {
+      "name": "REPORT_RATE_4K",
+      "title": "Set USB report rate to 4K",
+      "shortName": "4K"
+    },
+    {
+      "name": "REPORT_RATE_8K",
+      "title": "Set USB report rate to 8K",
+      "shortName": "8K"
+    }
+  ],
   "matrix": {
     "rows": 5,
     "cols": 9
