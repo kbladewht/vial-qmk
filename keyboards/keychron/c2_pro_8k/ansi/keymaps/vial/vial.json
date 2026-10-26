@@ -4,17 +4,17 @@
   "productId": "0x0522",
   "customKeycodes": [
     {
-      "name": "REPORT_RATE_1K",
+      "name": "KEY_RATE_1K",
       "title": "Set USB report rate to 1K",
       "shortName": "1K"
     },
     {
-      "name": "REPORT_RATE_4K",
+      "name": "KEY_RATE_4K",
       "title": "Set USB report rate to 4K",
       "shortName": "4K"
     },
     {
-      "name": "REPORT_RATE_8K",
+      "name": "KEY_RATE_8K",
       "title": "Set USB report rate to 8K",
       "shortName": "8K"
     }
