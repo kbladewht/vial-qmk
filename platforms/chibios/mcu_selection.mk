@@ -859,6 +859,9 @@ ifneq ($(findstring AT32F402, $(MCU)),)
   MCU_FAMILY = AT32
   MCU_SERIES = AT32F402_405
 
+  # UF2 family ID
+  UF2_FAMILY ?= AT32F402_405
+
   # Linker script to use
   # - it should exist either in <chibios>/os/common/startup/ARMCMx/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
@@ -893,6 +896,9 @@ ifneq ($(findstring AT32F405, $(MCU)),)
   MCU_FAMILY = AT32
   MCU_SERIES = AT32F402_405
 
+  # UF2 family ID
+  UF2_FAMILY ?= AT32F402_405
+
   # Linker script to use
   # - it should exist either in <chibios>/os/common/startup/ARMCMx/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
@@ -907,6 +913,8 @@ ifneq ($(findstring AT32F405, $(MCU)),)
   BOARD ?= GENERIC_AT32_F405XX
 
   USE_FPU ?= yes
+  USE_CHIBIOS_CONTRIB = yes
+  UF2_FAMILY ?= AT32F402_405
 
   # Bootloader address for AT32 DFU
   AT32_BOOTLOADER_ADDRESS ?= 0x1FFFA400

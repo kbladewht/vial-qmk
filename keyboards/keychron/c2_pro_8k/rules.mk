@@ -1,3 +1,3 @@
 USB_REPORT_INTERVAL_ENABLE=yes
-
-include keyboards/keychron/common/keychron_common.mk
+MCU_LDSCRIPT = AT32F405xC_uf2
+EXTRAINCDIRS += $(TOP_DIR)/keyboards/keychron/common

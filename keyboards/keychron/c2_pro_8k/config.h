@@ -15,22 +15,16 @@
  */
 
 #pragma once
-#include "eeconfig_kb.h"
+// #include "eeconfig_kb.h"
+#define WEAR_LEVELING_LOGICAL_SIZE 1024*8
+#define WEAR_LEVELING_BACKING_SIZE WEAR_LEVELING_LOGICAL_SIZE*2
 
+#define USB_SUSPEND_WAKEUP_DELAY 200
 /* OS indication LEDs */
 #define LED_MAC_OS_PIN C5
 #define LED_WIN_OS_PIN C4
 #define LED_OS_PIN_ON_STATE 1
 
-#ifdef RGB_MATRIX_ENABLE
-#    define SPI_DRIVER SPID1
-#    define SPI_SCK_PIN A5
-#    define SPI_MISO_PIN A6
-#    define SPI_MOSI_PIN A7
-
-#    define SNLED27351_SDB_PIN B7
-#    define SNLED27351_SPI_DIVISOR 64
-#endif
 
 /* Custom keycodes */
 #define CUSTOM_KEYCODES_ENABLE
@@ -42,4 +36,3 @@
 /* Factory test keys */
 #define FN_KEY_1 MO(1)
 #define FN_KEY_2 MO(3)
-

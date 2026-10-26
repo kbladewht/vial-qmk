@@ -12,20 +12,19 @@ A customizable full size (100%) keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/c2_pro_8k/ansi:keychron
-    make keychron/c2_pro_8k/iso:default
+    make keychron/c2_pro_8k/ansi:vial
 
-Flashing example for this keyboard:
+This target creates a UF2 firmware file for the TinyUF2 bootloader. Enter the
+keyboard's TinyUF2 mode, then copy the generated `.uf2` file to the keyboard's
+USB mass-storage drive.
 
-    make keychron/c2_pro_8k/ansi:keychron:flash
-    make keychron/c2_pro_8k/iso:keychron:flash
+The keyboard must already have a compatible TinyUF2 bootloader installed.
+The stock AT32 DFU bootloader is not a USB mass-storage drive and cannot flash
+UF2 files.
 
 ## bootloader
 
-Enter the bootloader in two ways:
-
-* **Bootmagic reset**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
-* **Physical reset button**: Briefly press the RESET button under the spacebar.
+Enter TinyUF2 mode using the bootloader's supported reset procedure.
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
@@ -38,4 +37,3 @@ If you just want to remap keys, configure layers, or change lighting, you don't 
 3. Remap keys, configure layers, and adjust lighting - changes apply instantly
 
 Keychron Launcher works out of the box with no JSON import required, providing a simpler browser-based setup flow for supported boards. Safari and other non-Chromium browsers will not work with Keychron Launcher.
-

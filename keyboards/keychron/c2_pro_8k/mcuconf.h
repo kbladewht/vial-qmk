@@ -17,6 +17,3 @@
 #pragma once
 
 #include_next <mcuconf.h>
-
-#undef AT32_SPI_USE_SPI1
-#define AT32_SPI_USE_SPI1 TRUE
