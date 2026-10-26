@@ -15,8 +15,7 @@
  */
 #include "usb_report_rate.h"
 
-#include "keychron_raw_hid.h"
-#include "raw_hid.h"
+#include "eeconfig.h"
 #include "state_notify.h"
 #include "usb_endpoints.h"
 #include "usb_main.h"
@@ -36,23 +35,29 @@ void report_rate_update_interval(void) {
 
 void report_rate_reset(void) {
     report_rate_div = REPORT_RATE_DIV_1K;
+    eeconfig_update_kb_datablock(&report_rate_div, 0, sizeof(report_rate_div));
     report_rate_update_interval();
+}
+
+void eeconfig_init_kb_datablock(void) {
+    report_rate_div = REPORT_RATE_DIV_1K;
+    eeconfig_update_kb_datablock(&report_rate_div, 0, sizeof(report_rate_div));
 }
 
 void report_rate_init(void) {
+    eeconfig_read_kb_datablock(&report_rate_div, 0, sizeof(report_rate_div));
+    if (report_rate_div > 6) {
+        report_rate_div = REPORT_RATE_DIV_1K;
+        eeconfig_update_kb_datablock(&report_rate_div, 0, sizeof(report_rate_div));
+    }
     report_rate_update_interval();
-}
-
-static bool report_rate_get(uint8_t *data) {
-    data[1] = report_rate_div;
-    data[2] = 0x7F;
-    return true;
 }
 
 static bool report_rate_set(uint8_t *data, bool notify) {
     if (data[0] > 6) return false;
 
     report_rate_div = data[0];
+    eeconfig_update_kb_datablock(&report_rate_div, 0, sizeof(report_rate_div));
     report_rate_update_interval();
 
 #    ifdef STATE_NOTIFY_ENABLE
@@ -65,26 +70,6 @@ static bool report_rate_set(uint8_t *data, bool notify) {
     return true;
 }
 
-void report_rate_hid_rx(uint8_t *data, uint8_t length) {
-    uint8_t cmd     = data[1];
-    bool    success = true;
-
-    switch (cmd) {
-        case REPORT_RATE_GET:
-            success = report_rate_get(&data[2]);
-            break;
-
-        case REPORT_RATE_SET:
-            success = report_rate_set(&data[2], false);
-            break;
-
-        default:
-            data[0] = 0xFF;
-            break;
-    }
-
-    data[2] = success ? 0 : 1;
-}
 
 bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
