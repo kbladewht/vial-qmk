@@ -15,17 +15,3 @@
  */
 
 #pragma once
-
-#ifdef RGB_MATRIX_ENABLE
-/* RGB Matrix Configuration */
-#    define RGB_MATRIX_LED_COUNT 104
-
-/* RGB Matrix Driver Configuration */
-#    define SNLED27351_SELECT_PINS \
-        { A8, C9 }
-
-/* Set LED driver current */
-#define SNLED27351_CURRENT_TUNE \
-    { 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70, 0x70 }
-
-#endif
