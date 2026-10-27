@@ -71,6 +71,25 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     uint8_t *command_id = &(data[0]);
     //*command_id         = id_unhandled;
 
+    // Return the configured report rate as 1, 4, or 8 kHz.
+    if (length >= 3 && data[0] == 0xb8) {
+        data[1] = 0xaa;
+        switch (report_rate_get_div()) {
+            case 3:
+                data[2] = 1;
+                break;
+            case 1:
+                data[2] = 4;
+                break;
+            case 0:
+                data[2] = 8;
+                break;
+            default:
+                data[2] = 0;
+                break;
+        }
+        return;
+    }
     // NRF_LOG_INFO("data[0] is 3 *************** %d",data[0]);
     switch (*command_id) {
         case 0x0B:
