@@ -5,7 +5,7 @@
 #include "quantum.h"
 
 enum usb_report_rate_keycodes {
-    KEY_RATE_1K = SAFE_RANGE,
+    KEY_RATE_1K = QK_KB_0,
     KEY_RATE_4K,
     KEY_RATE_8K,
     KEY_FN,

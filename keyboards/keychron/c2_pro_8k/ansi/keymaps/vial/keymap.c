@@ -43,8 +43,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {KC_0,  KEY_FN, KC_NO,       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
     },
     [1] = {
-        {QK_BOOT,  KC_NO,   KC_NO,   KEY_RATE_1K,   KEY_RATE_4K,   KEY_RATE_8K,   KC_NO,   KC_NO,   KC_NO   },
-        {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8   },
+        {QK_BOOT, KC_NO,   KC_NO,   KEY_RATE_1K,   KEY_RATE_4K,   KEY_RATE_8K,   KC_NO,   KC_NO,   KC_NO   },
+        {KC_GRV,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
