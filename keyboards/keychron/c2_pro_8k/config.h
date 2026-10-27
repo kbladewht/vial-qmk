@@ -1,7 +1,7 @@
 
 
 #pragma once
-// // #include "eeconfig_kb.h"
+#include "eeconfig_kb.h"
 // #define WEAR_LEVELING_LOGICAL_SIZE 1024*8
 // #define WEAR_LEVELING_BACKING_SIZE WEAR_LEVELING_LOGICAL_SIZE*2
 

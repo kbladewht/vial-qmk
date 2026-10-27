@@ -20,20 +20,7 @@
 #endif
 
 void eeconfig_init_kb_datablock(void) {
-#ifdef DYNAMIC_DEBOUNCE_ENABLE
-    extern void debounce_config_reset(void);
-    debounce_config_reset();
-#endif
-#if defined(SNAP_CLICK_ENABLE) && !defined(ANANLOG_MATRIX)
-    extern void snap_click_config_reset(void);
-    snap_click_config_reset();
-#endif
-#if defined(KEYCHRON_RGB_ENABLE) && defined(RGB_MATRIX_ENABLE)
-    extern void eeconfig_reset_custom_rgb(void);
-    eeconfig_reset_custom_rgb();
-#endif
-#if defined(USB_REPORT_INTERVAL_ENABLE)
+
     extern void report_rate_reset(void);
     report_rate_reset();
-#endif
 }
