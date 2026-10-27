@@ -82,3 +82,23 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
             break;
     }
 }
+
+ uint32_t start_timer      = 0;
+uint32_t previousTimeslot = 0;
+ uint32_t counterD = 1;
+void matrix_scan_user(void) {
+
+        uint32_t elapT_ms = timer_elapsed32(start_timer);//ms
+    uint32_t elapT_sec = elapT_ms/1000 ; // 秒
+    //纯粹打印log的目的
+    if (elapT_sec != previousTimeslot) {
+        counterD++;
+
+        previousTimeslot = elapT_sec;
+        if (counterD % 5 == 0) {
+           xprintf("Sec %ld \n", counterD);
+        }
+    }
+
+
+}
