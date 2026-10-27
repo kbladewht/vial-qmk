@@ -83,22 +83,16 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     }
 }
 
- uint32_t start_timer      = 0;
-uint32_t previousTimeslot = 0;
- uint32_t counterD = 1;
 void matrix_scan_user(void) {
+    static uint32_t last_report_time;
+    static uint32_t scan_count;
 
-        uint32_t elapT_ms = timer_elapsed32(start_timer);//ms
-    uint32_t elapT_sec = elapT_ms/1000 ; // 秒
-    //纯粹打印log的目的
-    if (elapT_sec != previousTimeslot) {
-        counterD++;
-
-        previousTimeslot = elapT_sec;
-        if (counterD % 5 == 0) {
-           xprintf("Sec %ld \n", counterD);
-        }
+    scan_count++;
+    uint32_t elapsed = timer_elapsed32(last_report_time);
+    if (elapsed >= 5000) {
+        uint32_t scans_per_second = scan_count * 1000U / elapsed;
+        xprintf("Matrix scans: %lu/s\n", (unsigned long)scans_per_second);
+        scan_count = 0;
+        last_report_time = timer_read32();
     }
-
-
 }
