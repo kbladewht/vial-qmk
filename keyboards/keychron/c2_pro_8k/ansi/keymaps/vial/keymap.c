@@ -83,6 +83,7 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     }
 }
 
+uint32_t counter = 0;
 void matrix_scan_user(void) {
     static uint32_t last_report_time;
     static uint32_t scan_count;
@@ -91,7 +92,20 @@ void matrix_scan_user(void) {
     uint32_t elapsed = timer_elapsed32(last_report_time);
     if (elapsed >= 5000) {
         uint32_t scans_per_second = scan_count * 1000U / elapsed;
-        xprintf("Matrix scans: %lu/s\n", (unsigned long)scans_per_second);
+        const char *report_rate_mode = "Unknown";
+        switch (report_rate_get_div()) {
+            case 0:
+                report_rate_mode = "8K";
+                break;
+            case 1:
+                report_rate_mode = "4K";
+                break;
+            case 3:
+                report_rate_mode = "1K";
+                break;
+        }
+        xprintf("Report rate mode: %s\n", report_rate_mode);
+        xprintf("counter %lu, Matrix scans: %lu/s\n", (unsigned long)(5 * counter++), (unsigned long)scans_per_second);
         scan_count = 0;
         last_report_time = timer_read32();
     }

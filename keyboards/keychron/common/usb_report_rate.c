@@ -39,6 +39,10 @@ void report_rate_init(void) {
     report_rate_update_interval();
 }
 
+uint8_t report_rate_get_div(void) {
+    return report_rate_div;
+}
+
 static bool report_rate_set(uint8_t *data, bool notify) {
     if (data[0] > 6) return false;
 
