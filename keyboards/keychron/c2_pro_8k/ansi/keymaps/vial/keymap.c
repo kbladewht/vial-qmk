@@ -36,14 +36,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
-        {KC_F7, KC_F2,  KC_F3,  KC_F6,  KC_F1,  KC_F5,  KC_F9,  KC_O,   KC_F11},
-        {KC_7,  KC_8,   KC_9,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
-        {KC_4,  KC_5,   KC_6,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
-        {KC_1,  KC_2,   KC_3,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
-        {KC_0,  MO(1), KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
+        {KC_F7, KC_F2,  KC_F3,      KC_F6,  KC_F1,  KC_F5,      KC_F9,  KC_O,   KC_F11},
+        {KC_7,  KC_8,   KC_9,       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
+        {KC_4,  KC_5,   KC_6,       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
+        {KC_1,  KC_2,   KC_3,       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
+        {KC_0,  KEY_FN, KC_NO,       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO },
     },
     [1] = {
-        {QK_BOOT,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
+        {QK_BOOT,  KC_NO,   KC_NO,   KEY_RATE_1K,   KEY_RATE_4K,   KEY_RATE_8K,   KC_NO,   KC_NO,   KC_NO   },
         {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8   },
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
         {KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO   },
@@ -52,9 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 extern void bootloader_jump(void);
 #include "raw_hid.h"
-// Keyboard level code can override this to handle custom messages from VIA.
-// See raw_hid_receive() implementation.
-// DO NOT call raw_hid_send() in the override function.
+
 void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     uint8_t *command_id = &(data[0]);
     //*command_id         = id_unhandled;
@@ -70,10 +68,3 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
             break;
     }
 }
-
-
-// extern void bootloader_jump_new(void);
-
-// void qf_bootloader_jump(void) {
-//     bootloader_jump_new();
-// }

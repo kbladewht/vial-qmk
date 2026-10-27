@@ -95,24 +95,8 @@ static key_combination_t key_comb_list[] = {
 // clang-format on
 
 void keychron_common_init(void) {
-#ifdef USB_REPORT_INTERVAL_ENABLE
     extern void report_rate_init(void);
     report_rate_init();
-#endif
-#if defined(SNAP_CLICK_ENABLE) && !defined(ANANLOG_MATRIX)
-    extern void snap_click_init(void);
-    snap_click_init();
-#endif
-#if defined(RGB_MATRIX_ENABLE) && defined(KEYCHRON_RGB_ENABLE)
-    extern void eeconfig_init_custom_rgb(void);
-    eeconfig_init_custom_rgb();
-#endif
-#if defined(ENCODER_ENABLE) && (PAL_USE_CALLBACKS == TRUE) && !defined(__AVR__)
-    encoder_cb_init();
-#endif
-#if defined(LK_WIRELESS_ENABLE) || defined(KC_BLUETOOTH_ENABLE)
-    wireless_common_init();
-#endif
 }
 
 void gui_toggle(void) {

@@ -17,6 +17,11 @@
       "name": "KEY_RATE_8K",
       "title": "Set USB report rate to 8K",
       "shortName": "8K"
+    },
+    {
+      "name": "FN",
+      "title": "Layer1",
+      "shortName": "FN"
     }
   ],
   "matrix": {

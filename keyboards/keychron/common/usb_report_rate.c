@@ -1,18 +1,4 @@
-/* Copyright 2025 @ Keychron (https://www.keychron.com)
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+
 #include "usb_report_rate.h"
 
 #include "eeconfig.h"
@@ -89,6 +75,13 @@ bool process_record_report_rate(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 uint8_t report_rate = REPORT_RATE_DIV_8K;
                 report_rate_set(&report_rate, true);
+            }
+            return false;
+        case KEY_FN:
+            if (record->event.pressed) {
+                layer_on(1);
+            } else {
+                layer_off(1);
             }
             return false;
         default:

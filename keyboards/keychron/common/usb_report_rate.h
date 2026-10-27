@@ -8,6 +8,7 @@ enum usb_report_rate_keycodes {
     KEY_RATE_1K = SAFE_RANGE,
     KEY_RATE_4K,
     KEY_RATE_8K,
+    KEY_FN,
 };
 
 void report_rate_init(void);
